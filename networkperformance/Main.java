@@ -2,8 +2,12 @@ package networkperformance;
 
 import networkperformance.blocksync.BlockSyncSocketClient;
 import networkperformance.blocksync.BlockSyncSocketServer;
+import networkperformance.netty.NettySocketClient;
+import networkperformance.netty.NettySocketServer;
 import networkperformance.nonblockasync.NonBlockAsyncSocketClient;
 import networkperformance.nonblockasync.NonBlockAsyncSocketServer;
+import networkperformance.nonblocksync.NonBlockSyncSocketClient;
+import networkperformance.nonblocksync.NonBlockSyncSocketServer;
 
 import java.io.IOException;
 
@@ -15,8 +19,13 @@ public class Main {
   public static ServerClient createServer(int type) {
     switch (type){
       case 1 :
+        return new NonBlockSyncSocketClient();
+
       case 2 :
         return new NonBlockAsyncSocketServer();
+
+      case 3 :
+        return new NettySocketServer();
 
       case 0 :
       default:
@@ -27,8 +36,13 @@ public class Main {
   public static ServerClient createClient(int type) {
     switch (type){
       case 1 :
+        return new NonBlockSyncSocketServer();
+
       case 2 :
         return new NonBlockAsyncSocketClient();
+
+      case 3 :
+        return new NettySocketClient();
 
       case 0 :
       default:
